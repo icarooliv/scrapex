@@ -3,28 +3,25 @@ defmodule Scrapex do
   Documentation for `Scrapex`.
   """
 
-  @doc """
-  Hello world.
+  alias Scrapex.Http
 
-  ## Examples
-
-      iex> Scrapex.run("https://www.example.com")
-      {:ok, "https://www.example.com"}
-
-      iex> Scrapex.run("http://www.example.com")
-      {:ok, "http://www.example.com"}
-
-      iex> Scrapex.run("ws://www.example.com")
-      {:error, :invalid_format}
-
-  """
   def run(url) do
     case normalize_url(url) do
       {:ok, url} ->
-        {:ok, url}
+        scrape(url)
 
       {:error, message} ->
         {:error, message}
+    end
+  end
+
+  defp scrape(url) do
+    case Http.Client.get(url) do
+      {:ok, %{status_code: 200, body: body}} ->
+        {:ok, body}
+
+      {:error, _} ->
+        {:error, :scrape_failed}
     end
   end
 
