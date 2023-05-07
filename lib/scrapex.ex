@@ -9,6 +9,9 @@ defmodule Scrapex do
     with {:ok, url} <- normalize_url(url),
          {:ok, %{body: body}} <- Http.Client.get(url) do
       scrape(body, tag_attrs, url)
+    else
+      {:error, %{status_code: status_code}} -> {:error, status_code}
+      {:error, message} -> {:error, message}
     end
   end
 

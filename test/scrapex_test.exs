@@ -91,8 +91,19 @@ defmodule ScrapexTest do
     assert {:error, :invalid_format} = Scrapex.run(nil, @tag_attrs)
   end
 
+  test "returns error for failed requests" do
+    mock_get_failure()
+
+    assert {:error, 404} = Scrapex.run("https://page-does-not-exist.com", @tag_attrs)
+  end
+
   def mock_get(response) do
     Scrapex.Http.ClientMock
     |> expect(:get, fn _, _, _ -> {:ok, %{body: response, status_code: 200}} end)
+  end
+
+  def mock_get_failure() do
+    Scrapex.Http.ClientMock
+    |> expect(:get, fn _, _, _ -> {:error, %{status_code: 404}} end)
   end
 end
