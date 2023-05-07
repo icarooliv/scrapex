@@ -19,13 +19,30 @@ defmodule Scrapex do
 
   """
   def run(url) do
-    case valid_url?(url) do
-      true ->
+    case normalize_url(url) do
+      {:ok, url} ->
         {:ok, url}
 
-      _ ->
+      {:error, message} ->
+        {:error, message}
+    end
+  end
+
+  defp normalize_url(url) do
+    cond do
+      valid_url?(url) ->
+        {:ok, url}
+
+      valid_url?("https://" <> url) && without_scheme?(url) ->
+        {:ok, "https://" <> url}
+
+      true ->
         {:error, :invalid_format}
     end
+  end
+
+  defp without_scheme?(url) do
+    is_nil(URI.parse(url).scheme)
   end
 
   defp valid_url?(url) when is_binary(url) do
