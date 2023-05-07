@@ -3,10 +3,10 @@ defmodule ScrapexTest do
   doctest Scrapex
 
   test "receives a valid url" do
-    assert {:ok, _} = Scrapex.scrape("https://www.google.com")
+    assert {:ok, _} = Scrapex.run("https://www.example.com")
   end
 
   test "returns error for an invalid url" do
-    assert {:error, _} = Scrapex.scrape("https://www.google.com")
+    assert {:error, _} = Scrapex.run("www.example.com")
   end
 end
