@@ -16,6 +16,7 @@ UpLearn scraper challenge.
 - Install dependencies
 
 `cd scrapex`
+
 `mix deps.get`
 
 - Open the project with IEx:
@@ -51,11 +52,6 @@ iex(3)> Scrapex.run("abc", [{"assets", "img", "src"}, {"links", "a", "href"}])
 {:error, :invalid_format}
 ```
 
-```bash
-iex(7)> Scrapex.run("https://elixirforum.com/t/page-missing", [{"assets", "img", "src"}, {"links", "a", "href"}])
-{:error, 404}
-```
-
 Page not found:
 
 ```bash
@@ -85,7 +81,7 @@ In the test environment, I can define the [HTTP.ClientMock](https://github.com/i
 
 Because my time window to this task is small and the other modules are smaller enough to rely on integration tests. Obviously it would be a good idea to unit test the HTTP behaviour. As the `Scrapex` module have only one public function, the private ones are tested indirectly.
 
-### Why Scrapex.run/1 fn doesn't have doctests?
+### Why Scrapex.run/1` doesn't have doctests?
 
 Because it's a function with side effects. [See here](https://elixirforum.com/t/doctests-and-http-calls/1508/2).
 
