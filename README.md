@@ -85,7 +85,7 @@ In the test environment, I can define the [HTTP.ClientMock](https://github.com/i
 
 Because my time window to this task is small and the other modules are smaller enough to rely on integration tests. Obviously it would be a good idea to unit test the HTTP behaviour. As the `Scrapex` module have only one public function, the private ones are tested indirectly.
 
-## Why Scrapex.run/1 fn doesn't have doctests?
+### Why Scrapex.run/1 fn doesn't have doctests?
 
 Because it's a function with side effects. [See here](https://elixirforum.com/t/doctests-and-http-calls/1508/2).
 
