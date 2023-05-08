@@ -65,7 +65,7 @@ iex> Scrapex.run("https://elixirforum.com/t/page-do-not-exist", [{"assets", "img
 
 ## Rationale and improvements
 
-Here I discuss some thoughts and decisions that I've had during this challenge.
+Here I discuss some thoughts and decisions that I had during this challenge.
 
 ### What was my design strategy?
 
@@ -89,14 +89,14 @@ Because my time window to this task is small and the other modules are smaller e
 
 Because it's a function with side effects. [See here](https://elixirforum.com/t/doctests-and-http-calls/1508/2).
 
-### Assumptions
+## Assumptions
 
 1. The url should accepts the formats `www.example.com`, `https://example.com` and other variations. If the url doesn't come with the schema prefix as `http` or `https`, it must be prepended to `https://`.
 2. The scrape function must merge partial URL strings with the base URL.
 3. The scrape function will not handle cases where a link points to a image and it's added to the `links` instead of `assets`.
 4. This project is "platform agnostic" meaning it should be made in a way that it can be ported to a lib that can be installed, used as a umbrella app, imported as a git submodule, copy-pasted inside a Phoenix project etc.
 
-### Next steps
+## Next steps
 
 1. Define a better structure for the HTTP responses. Now is just a map and if someone mistakenly changes the structure it'll break the code without warnings.
 2. Do unit tests in the HTTP client behaviour.
