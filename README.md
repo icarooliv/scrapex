@@ -1,6 +1,6 @@
 # Scrapex
 
-**TODO: Add description**
+UpLearn scraper challenge.
 
 ## Installation
 
